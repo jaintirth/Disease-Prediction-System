@@ -1,0 +1,260 @@
+
+
+      .custom-bg {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ddd;
+    }
+      .myimg{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    display:block;
+    border:2px solid #fff;
+    border-radius:25px;
+    }
+    .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 25px;
+    background: #F8F9FA;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    }
+
+    .container:hover {
+    transform: scale(1.02);
+    }
+    .form-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #2C3E50;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 40px;
+    }
+     .custom-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    color: #355c7d;
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    text-transform: capitalize;
+  }
+
+
+  .form-control text-center{
+    border-radius: 10px; /* Slightly rounded corners */
+    padding: 10px; /* Better spacing */
+    font-size: 16px; /* Easy-to-read text */
+    margin-top: 10px;
+    width : 350px;
+  }
+  .btn-primary {
+    background-color: #5DADE2; /* Matches navbar */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #3498DB; /* Slightly darker blue on hover */
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.hero {
+    height: 100vh; /* Full screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #5DADE2, #3498DB);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.hero-content .btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 18px;
+    background-color: white;
+    color: #3498DB;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.hero-content .btn:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.05);
+}
+
+#form-container {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#form-container.show {
+    opacity: 1;
+}
+        .result-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.toggle-button {
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    color: white;
+}
+
+.btn-disease { background: #F39334; }
+.btn-description { background: #268AF3; }
+.btn-precaution { background: #F371F9; }
+.btn-medications { background: #F8576F; }
+.btn-workouts { background: #99F741; color: black; }
+.btn-diets { background: #E5E23D; color: black; }
+
+.toggle-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+        .modal-dialog {
+    display: flex;
+    align-items: center; /* Vertical center */
+    justify-content: center; /* Horizontal center */
+    min-height: 100vh; /* Ensure full height */
+}
+
+/* Optional: Slight modal styling for a cleaner look */
+.modal-content {
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    animation: scaleIn 0.4s ease-in-out; /* Smooth pop-in effect */
+}
+.modal-body {
+    background-color: #f8f9fa; /* subtle light background */
+}
+
+#health-tips {
+  background-color: #eafaf1;
+  color: #2c7a7b;
+  padding: 15px;
+  margin-top: 20px;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Smooth pop-in animation */
+@keyframes scaleIn {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+nav .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0066cc !important;
+    letter-spacing: 0.5px;
+}
+nav .navbar-brand:hover {
+    color: #004a99;
+}
+
+nav .nav-link {
+    color: #333;
+    font-size: 1rem;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+
+nav .nav-link:hover {
+    color: #0066cc;
+    border-bottom: 2px solid #0066cc;
+}
+
+
+
+nav .btn-outline-success {
+    color: #0066cc;
+    border-color: #0066cc;
+    border-radius: 20px;
+}
+
+nav .btn-outline-success:hover {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+.autocomplete-results {
+    position: absolute;
+    top: calc(100% + 5px); /* Drops directly under the search bar */
+    left: 0;
+    width: 100%; /* Match input width perfectly */
+    max-width: 350px; /* Optional: restrict width */
+    max-height: 200px; /* Limit height with scroll */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    background: #fff;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Ensure the form stays in position */
+.navbar .d-flex {
+    position: relative;
+}
+
+/* Dropdown item styling */
+.autocomplete-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Smooth hover effect */
+.autocomplete-item:hover {
+    background: #f0f0f0;
+}
+
+
+
