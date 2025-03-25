@@ -1,9 +1,19 @@
+
 from flask import Flask,request,render_template,jsonify
 import sklearn
 import numpy as np
 import pandas as pd
 import pickle
 import ast
+import google.generativeai as genai
+
+# Set Google Gemini API key
+genai.configure(api_key="AIzaSyAJS4MF2IB4nuFVLji1bXRpSrpAwE1nEAk")
+# models = genai.list_models()
+# for model in models:
+#     print(model.name)
+
+
 
 app = Flask(__name__)
 
@@ -67,6 +77,37 @@ def home():
 @app.route('/get_diseases')
 def get_diseases():
     return jsonify(unique_diseases)
+
+@app.route('/chatbot', methods=['POST'])
+def chatbot():
+    user_query = request.json['query']
+
+    try:
+        # Send the user's query to Gemini for response
+        model = genai.GenerativeModel("gemini-1.5-pro-latest")
+        response = model.generate_content(
+            f"""
+            You are an expert medical assistant specializing in health-related queries.
+            Only answer questions about:
+            - Diseases, symptoms, medications, workouts, diets, precautions
+            - General health tips and medical advice
+            Limit your answer to 100 words
+            If the query is unrelated to health, politely refuse to answer.
+
+            User: {user_query}
+            """
+        )
+
+        # Extract chatbot response
+        answer = response.candidates[0].content.parts[0].text.strip()
+        return jsonify({"response": answer})
+
+    except Exception as e:
+        print(f"❌ Chatbot Error: {e}")
+        return jsonify({"response": "⚠️ Sorry, I couldn't process that right now."})
+
+
+
 
 
 @app.route('/predict',methods=['POST','GET'])

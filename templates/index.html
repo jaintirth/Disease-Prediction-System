@@ -109,8 +109,8 @@
                   </span>
                 </div>
 
-
               </form>
+
                 <script>
                     function validateAndSubmit(event) {
                         event.preventDefault();  // Prevent form from submitting immediately
@@ -136,6 +136,7 @@
                         function showMainContent() {
                             document.getElementById("hero-section").style.display = "none";
                             document.getElementById("main-content").style.display = "block";
+                            document.getElementById("chatbot-icon").style.display = "block";  // Ensure chatbot shows up!
                             window.scrollTo({ top: 0, behavior: "smooth" });  // Ensures smooth scrolling to top
                         }
                 </script>
@@ -157,8 +158,21 @@
           </script>
 
 
-            </div>
+      </div>
   </div>
+  <!-- Chatbot Button -->
+    <div id="chatbot-icon"  style="display:none" onclick="toggleChatbot()">
+        <img src="{{ url_for('static', filename='icon.png') }}" alt="Chatbot" style="width: 60px; height: 60px; cursor: pointer;">
+    </div>
+  <!-- Chatbot Window -->
+            <div id="chatbot-container">
+                <div id="chatbot-header">
+                    <h4>HP-Bot</h4>
+                    <span onclick="toggleChatbot()">❌</span>
+                </div>
+                <div id="chatbot-content"></div>
+                <input type="text" id="chatbot-input" placeholder="Ask me anything related to health..." onkeypress="handleChat(event)">
+            </div>
   <div id="health-tips" class="alert alert-info mt-3 text-center shadow-sm" style="font-weight: bold; border-radius: 10px; opacity: 0; transition: opacity 0.5s ease;"></div>
 
   <script>
@@ -443,6 +457,81 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+  <script>
+                        // Show/hide chatbot
+            function toggleChatbot() {
+                const chatbot = document.getElementById('chatbot-container');
+                chatbot.classList.toggle('visible');
+            }
+
+            // Typing effect function
+            function typeResponse(element, message, speed = 30) {
+                let i = 0;
+                element.innerHTML = ''; // Clear content first
+
+                const typingInterval = setInterval(() => {
+                    element.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(typingInterval);
+                    }
+                }, speed);
+            }
+
+            // Handle chat input
+            function handleChat(event) {
+                if (event.key === "Enter") {
+                    const userInput = document.getElementById('chatbot-input').value.trim();
+                    const chatContent = document.getElementById('chatbot-content');
+                    if (!userInput) return;
+
+                    // Display user message with a distinct style
+                    const userMessage = document.createElement('div');
+                    userMessage.className = "user-message";
+                    userMessage.innerText = userInput;
+                    chatContent.appendChild(userMessage);
+
+                    document.getElementById('chatbot-input').value = '';
+
+                    // Show "HealthBot is typing..." while processing
+                    const botTyping = document.createElement('div');
+                    botTyping.id = "bot-typing";
+                    botTyping.innerHTML = `<em>HP-Bot is typing...</em>`;
+                    chatContent.appendChild(botTyping);
+                    chatContent.scrollTop = chatContent.scrollHeight;
+
+                    // Send user query to Flask backend
+                    fetch('/chatbot', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ query: userInput })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        botTyping.remove(); // Remove typing indicator
+
+                        // Create a bot message with the new style
+                        const botMessage = document.createElement('div');
+                        botMessage.className = "bot-message";
+                        chatContent.appendChild(botMessage);
+
+                        // Trigger typing effect for bot response
+                        typeResponse(botMessage, `${data.response}`, 30);
+
+                        // Keep scroll at the bottom
+                        chatContent.scrollTop = chatContent.scrollHeight;
+                    })
+                    .catch(() => {
+                        botTyping.remove();
+                        const errorMessage = document.createElement('div');
+                        errorMessage.className = "bot-message";
+                        errorMessage.innerHTML = `⚠️ Sorry, I couldn't process that right now.`;
+                        chatContent.appendChild(errorMessage);
+                    });
+                }
+            }
+
+  </script>
 
   </body>
 </html>
