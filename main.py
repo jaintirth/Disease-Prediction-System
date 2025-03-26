@@ -1,3 +1,4 @@
+import os
 
 from flask import Flask,request,render_template,jsonify
 import sklearn
@@ -6,13 +7,12 @@ import pandas as pd
 import pickle
 import ast
 import google.generativeai as genai
+from dotenv import load_dotenv
+import os
 
-# Set Google Gemini API key
-genai.configure(api_key="AIzaSyAJS4MF2IB4nuFVLji1bXRpSrpAwE1nEAk")
-# models = genai.list_models()
-# for model in models:
-#     print(model.name)
 
+load_dotenv("key.env")
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
 app = Flask(__name__)
