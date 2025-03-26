@@ -6,16 +6,22 @@ import numpy as np
 import pandas as pd
 import pickle
 import ast
+import pytesseract
+from PIL import Image
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 
+
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 load_dotenv("key.env")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # loading datasets
 training_data=pd.read_csv("datasets/Training.csv")
@@ -77,6 +83,47 @@ def home():
 @app.route('/get_diseases')
 def get_diseases():
     return jsonify(unique_diseases)
+
+@app.route('/upload_report', methods=['POST'])
+def upload_report():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"})
+
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({"error": "No selected file"})
+
+    if file:
+        # Save file
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(file_path)
+
+        # Extract text from image
+        try:
+            extracted_text = pytesseract.image_to_string(file_path)
+            if not extracted_text.strip():
+                return jsonify({"error": "Failed to extract text from the image. Make sure it's clear!"})
+
+            # Send extracted text to Gemini AI (or your chosen model) for summarization
+            model = genai.GenerativeModel("gemini-1.5-pro-latest")
+            response = model.generate_content(
+                f"If this is not related to medical politely refuse that analysis is not possible on non medical images and stop here and don't consider my text after this , else Summarize the medical report (minimum 150 words) in simplest terms so that it is understandable by a normal person : \n{extracted_text}"
+            )
+
+            simplified_report = response.text.strip()
+
+            return jsonify({"simplified_report": simplified_report})
+
+        except Exception as e:
+            print(f"❌ Report Processing Error: {e}")
+            return jsonify({"error": "Failed to analyze report."})
+
+    return jsonify({"error": "Failed to upload file"})
+
+@app.route('/report_analysis')
+def report_analysis():
+    return render_template('report_analysis.html')
+
 
 @app.route('/chatbot', methods=['POST'])
 def chatbot():
