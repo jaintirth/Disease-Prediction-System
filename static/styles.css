@@ -19,8 +19,8 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 25px;
-    background: #F8F9FA;
-    border-radius: 15px;
+    background: #eaf6f6;
+    border-radius: 25px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
     }
@@ -53,7 +53,7 @@
 
 
   .form-control text-center{
-    border-radius: 10px; /* Slightly rounded corners */
+    border-radius: 25px; /* Slightly rounded corners */
     padding: 10px; /* Better spacing */
     font-size: 16px; /* Easy-to-read text */
     margin-top: 10px;
@@ -398,4 +398,42 @@ nav .btn-outline-success:hover {
     display: inline-block;
     width: fit-content;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.news-container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.news-container h2 {
+    font-size: 22px;
+    color: #007BFF;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.news-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.news-item a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+.news-item a:hover {
+    color: #007BFF;
+}
+
+.news-item p {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
 }

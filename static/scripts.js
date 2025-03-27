@@ -116,3 +116,32 @@
                 }
             }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const apiKey = "61f769173fc44524bd6630474cf57462"; // Replace with your API key
+    const newsUrl = `https://newsapi.org/v2/top-headlines?category=health&country=us&apiKey=${apiKey}`;
+
+    fetch(newsUrl)
+        .then(response => response.json())
+        .then(data => {
+            const newsContainer = document.getElementById("news-articles");
+            newsContainer.innerHTML = "";
+
+            if (data.articles.length > 0) {
+                data.articles.slice(0, 5).forEach(article => {
+                    let newsItem = document.createElement("div");
+                    newsItem.classList.add("news-item");
+                    newsItem.innerHTML = `
+                        <a href="${article.url}" target="_blank">${article.title}</a>
+                        <p>${article.description || "No description available."}</p>
+                    `;
+                    newsContainer.appendChild(newsItem);
+                });
+            } else {
+                newsContainer.innerHTML = "<p>No health news available at the moment.</p>";
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching news:", error);
+            document.getElementById("news-articles").innerHTML = "<p>Failed to load news.</p>";
+        });
+});

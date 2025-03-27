@@ -92,7 +92,7 @@
                       id="symptoms-input"
                       class="form-control text-center"
                       name="symptoms"
-                      placeholder="acidity, cough, shivering..."
+                      placeholder="Enter symptoms such as acidity, cough, shivering..."
                     />
                   </div>
 
@@ -113,9 +113,10 @@
                   <span id="loading-spinner" style="display: none; margin-top: 10px; color: #555;">
                     ⏳ Processing...
                   </span>
-                </div>
+              </div>
 
               </form>
+
 
                 <script>
                     function validateAndSubmit(event) {
@@ -165,11 +166,16 @@
 
 
       </div>
-  </div>
-  <!-- Chatbot Button -->
-    <div id="chatbot-icon"  style="display:none" onclick="toggleChatbot()">
+      <div id="health-news-section" class="news-container">
+          <h2>Health News & Updates</h2>
+          <div id="news-articles">
+              <p>Loading latest health news...</p>
+          </div>
+      </div>
+      <div id="health-tips" class="alert alert-info mt-3 text-center shadow-sm" style="font-weight: bold; border-radius: 10px; opacity: 0; transition: opacity 0.5s ease;"></div>
+      <div id="chatbot-icon"  style="" onclick="toggleChatbot()">
         <img src="{{ url_for('static', filename='icon.png') }}" alt="Chatbot" style="width: 60px; height: 60px; cursor: pointer;">
-    </div>
+      </div>
   <!-- Chatbot Window -->
             <div id="chatbot-container">
                 <div id="chatbot-header">
@@ -179,7 +185,12 @@
                 <div id="chatbot-content"></div>
                 <input type="text" id="chatbot-input" placeholder="Ask me anything related to health..." onkeypress="handleChat(event)">
             </div>
-  <div id="health-tips" class="alert alert-info mt-3 text-center shadow-sm" style="font-weight: bold; border-radius: 10px; opacity: 0; transition: opacity 0.5s ease;"></div>
+  </div>
+
+
+
+
+
 
   <script>
 // List of rotating health tips
