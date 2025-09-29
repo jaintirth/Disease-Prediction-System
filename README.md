@@ -68,4 +68,39 @@ Users input symptoms → Model predicts disease → Displays:
 - Live health headlines using **News API**
 - Updated regularly with trustworthy news sources
 
+## 📸 Project Preview
+
+### 🏠 Home Page
+![Home Page](screenshots/home.png)
+
+### 🤖 AI Chatbot
+![Chatbot](screenshots/bot.png)
+
+### 📑 Medical Report Analyzer
+![Report Analyzer](screenshots/report.png)
+
+### 🏥 Symptom Input
+![Predict Disease](screenshots/predict.png)
+
+### 📊 Results Display
+![Prediction Results](screenshots/prediction_results.png)
+
+### 📖 Project Overview
+![About](screenshots/about.png)
+
+### 📧 Reach Out
+![Contact Us](screenshots/contact_us.png)
+
+### 🦠 Disease Information
+![Disease Details](screenshots/info.png)
+
+### 🧭 User Guide
+![How to Use](screenshots/how_to_use.png)
+
+### 🗞 Live Updates
+![News](screenshots/news.png)
+
+### 🔍 Search Feature
+![Search Disease](screenshots/search_disease.png)
+
 ---
