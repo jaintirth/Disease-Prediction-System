@@ -68,6 +68,8 @@ Users input symptoms → Model predicts disease → Displays:
 - Live health headlines using **News API**
 - Updated regularly with trustworthy news sources
 
+---
+
 ## 📸 Project Preview
 
 ### 🏠 Home Page
